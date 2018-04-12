@@ -43,7 +43,6 @@ function filter(c: connection, action: Action): bool
             $proto=fmt("%s", get_port_transport_proto(id$resp_p))
         );
         msg = to_json(oreq);
-        print msg;
         ok = ok && send_json_udp(manager_ip, 9000, msg);
     }
     if(action == SHUNT_RESP || action == SHUNT_CONN) {
@@ -55,7 +54,6 @@ function filter(c: connection, action: Action): bool
             $proto=fmt("%s", get_port_transport_proto(id$resp_p))
         );
         msg = to_json(rreq);
-        print msg;
         ok = ok && send_json_udp(manager_ip, 9000, msg);
     }
     return ok;
