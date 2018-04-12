@@ -1,1 +1,25 @@
+function send_json_udp%(host: string, port: count, body: string%): bool
+   %{
+    int sock;
+    struct sockaddr_in server;
+    int slen=sizeof(server);
+    int length;
 
+    memset((char *) &server, 0, sizeof(server));
+    server.sin_family = AF_INET;
+    server.sin_port = htons(uint32(port));
+    if (inet_aton(host->CheckString(), &server.sin_addr)==0) {
+        builtin_error("Can't initialize server address");
+        return new Val(0, TYPE_BOOL);
+    }
+    if((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP)) == -1) {
+        builtin_error("Can't initialize server socket");
+        return new Val(0, TYPE_BOOL);
+    }
+
+    const char *msg = body->CheckString();
+    length = strlen(msg);
+    sendto(sock, msg, length, 0, (struct sockaddr*)&server, slen);
+    close(sock);
+    return new Val(1, TYPE_BOOL);
+    %}

@@ -1,0 +1,4 @@
+[package]
+script_dir = scripts/NCSA/Dumbno
+plugin_dir = build/NCSA_Dumbno.tgz
+build_command = ./configure --bro-dist=%(bro_dist)s && make
