@@ -1,4 +1,4 @@
-function send_json_udp%(host: string, port: count, body: string%): bool
+function send_json_udp%(host: string, rport: count, body: string%): bool
    %{
     int sock;
     struct sockaddr_in server;
@@ -7,7 +7,7 @@ function send_json_udp%(host: string, port: count, body: string%): bool
 
     memset((char *) &server, 0, sizeof(server));
     server.sin_family = AF_INET;
-    server.sin_port = htons(uint32(port));
+    server.sin_port = htons(uint32(rport));
     if (inet_aton(host->CheckString(), &server.sin_addr)==0) {
         builtin_error("Can't initialize server address");
         return new Val(0, TYPE_BOOL);
