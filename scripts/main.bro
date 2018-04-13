@@ -17,17 +17,20 @@ export {
         dport: count;
         proto: string;
     };
+    global dumbno_server_ip: string = "" &redef;
     global filter: function(c: connection, action: Action): bool;
 }
 
 function filter(c: connection, action: Action): bool
 {
     local id = c$id;
-    local manager_ip: string;
-    if("manager" in Cluster::nodes) {
-        manager_ip = fmt("%s", Cluster::nodes["manager"]$ip);
+    local server_ip: string;
+    if (dumbno_server_ip != "") {
+        server_ip = dumbno_server_ip;
+    } else if("manager" in Cluster::nodes) {
+        server_ip = fmt("%s", Cluster::nodes["manager"]$ip);
     } else {
-        manager_ip = "127.0.0.1";
+        server_ip = "127.0.0.1";
     }
     local msg: string;
     local ok: bool;
@@ -43,7 +46,7 @@ function filter(c: connection, action: Action): bool
             $proto=fmt("%s", get_port_transport_proto(id$resp_p))
         );
         msg = to_json(oreq);
-        ok = ok && send_json_udp(manager_ip, 9000, msg);
+        ok = ok && send_json_udp(server_ip, 9000, msg);
     }
     if(action == SHUNT_RESP || action == SHUNT_CONN) {
         local rreq = FilterRequest(
@@ -54,7 +57,7 @@ function filter(c: connection, action: Action): bool
             $proto=fmt("%s", get_port_transport_proto(id$resp_p))
         );
         msg = to_json(rreq);
-        ok = ok && send_json_udp(manager_ip, 9000, msg);
+        ok = ok && send_json_udp(server_ip, 9000, msg);
     }
     return ok;
 }
