@@ -1,5 +1,4 @@
-
 NCSA::Dumbno
 =================================
 
-<Insert plugin documentation here.>
+A native Bro plugin for https://github.com/ncsa/dumbno
