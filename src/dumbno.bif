@@ -1,3 +1,7 @@
+%%{
+#include <unistd.h>
+%%}
+
 function send_json_udp%(host: string, rport: count, body: string%): bool
    %{
     int sock;
