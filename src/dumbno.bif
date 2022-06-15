@@ -18,7 +18,6 @@ function send_json_udp%(host: string, rport: count, body: string%): bool
     }
     if((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP)) == -1) {
         zeek::emit_builtin_error("Can't initialize server socket");
-        //return new Val(0, TYPE_BOOL);
 	return zeek::val_mgr->Bool(0);
     }
 
@@ -26,6 +25,5 @@ function send_json_udp%(host: string, rport: count, body: string%): bool
     length = strlen(msg);
     sendto(sock, msg, length, 0, (struct sockaddr*)&server, slen);
     close(sock);
-    //return new Val(1, TYPE_BOOL);
     return zeek::val_mgr->Bool(1);
     %}
