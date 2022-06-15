@@ -11,19 +11,21 @@ function send_json_udp%(host: string, rport: count, body: string%): bool
 
     memset((char *) &server, 0, sizeof(server));
     server.sin_family = AF_INET;
-    server.sin_port = htons(uint32(rport));
+    server.sin_port = htons(uint32_t(rport));
     if (inet_aton(host->CheckString(), &server.sin_addr)==0) {
-        builtin_error("Can't initialize server address");
-        return new Val(0, TYPE_BOOL);
+        zeek::emit_builtin_error("Can't initialize server address");
+        return zeek::val_mgr->Bool(0);
     }
     if((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP)) == -1) {
-        builtin_error("Can't initialize server socket");
-        return new Val(0, TYPE_BOOL);
+        zeek::emit_builtin_error("Can't initialize server socket");
+        //return new Val(0, TYPE_BOOL);
+	return zeek::val_mgr->Bool(0);
     }
 
     const char *msg = body->CheckString();
     length = strlen(msg);
     sendto(sock, msg, length, 0, (struct sockaddr*)&server, slen);
     close(sock);
-    return new Val(1, TYPE_BOOL);
+    //return new Val(1, TYPE_BOOL);
+    return zeek::val_mgr->Bool(1);
     %}
