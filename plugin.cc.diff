@@ -1,0 +1,22 @@
+--- Plugin.cc	2022-06-15 14:36:19.007206000 -0700
++++ /home/bro/zeek-cpp/packages/external/bro-dumbno-client/src/Plugin.cc	2022-06-15 12:59:39.424633000 -0700
+@@ -1,15 +1,15 @@
+ 
+ #include "Plugin.h"
+ 
+-namespace plugin { namespace NCSA_Dumbno { Plugin plugin; } }
++namespace zeek { namespace plugin { namespace NCSA_Dumbno { Plugin plugin; } } }
+ 
+-using namespace plugin::NCSA_Dumbno;
++using namespace zeek::plugin::NCSA_Dumbno;
+ 
+-plugin::Configuration Plugin::Configure()
++zeek::plugin::Configuration Plugin::Configure()
+ 	{
+ 	plugin::Configuration config;
+ 	config.name = "NCSA::Dumbno";
+-	config.description = "A native Bro plugin for https://github.com/ncsa/dumbno";
++	config.description = "A native Zeek plugin for https://github.com/ncsa/dumbno";
+ 	config.version.major = 0;
+ 	config.version.minor = 1;
+ 	return config;
