@@ -4,18 +4,20 @@
 
 #include <plugin/Plugin.h>
 
+namespace zeek {
 namespace plugin {
 namespace NCSA_Dumbno {
 
-class Plugin : public ::plugin::Plugin
+class Plugin : public zeek::plugin::Plugin
 {
 protected:
 	// Overridden from plugin::Plugin.
-	plugin::Configuration Configure() override;
+	zeek::plugin::Configuration Configure() override;
 };
 
 extern Plugin plugin;
 
+}
 }
 }
 
