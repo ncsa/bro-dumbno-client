@@ -11,6 +11,6 @@ zeek::plugin::Configuration Plugin::Configure()
 	config.name = "NCSA::Dumbno";
 	config.description = "A native Zeek plugin for https://github.com/ncsa/dumbno";
 	config.version.major = 0;
-	config.version.minor = 1;
+	config.version.minor = 2;
 	return config;
 	}
