@@ -1,5 +1,4 @@
 @load base/frameworks/cluster
-@load base/utils/json
 
 module Dumbno;
 
