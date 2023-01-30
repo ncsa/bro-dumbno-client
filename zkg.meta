@@ -1,7 +1,6 @@
 [package]
 description = Adds functionality for bro to talk with dumbno
 tags = zeek plugin, zeekctl plugin, dumbno
-script_dir = scripts/
 plugin_dir = build/NCSA_Dumbno.tgz
 build_command = ./configure && make
 depends =
